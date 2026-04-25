@@ -23,7 +23,9 @@ def main() -> None:
         if npy.stem != "city":
             rgb = depth_to_rgb(depth)
             plt.imsave(OUT / f"{npy.stem}_hilbertmap.png", rgb)
-            print(f"{npy.name} -> {npy.stem}_hilbertmap.png  ({depth.min():.2f}-{depth.max():.2f} m)")
+            print(
+                f"{npy.name} -> {npy.stem}_hilbertmap.png  ({depth.min():.2f}-{depth.max():.2f} m)"
+            )
         else:
             rgb = depth_to_rgb(depth, lam=-4.0, c=120.0)
             plt.imsave(OUT / "city_lam-4_c120.png", rgb)
