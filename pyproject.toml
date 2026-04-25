@@ -37,3 +37,6 @@ test = ["pytest"]
 [project.urls]
 Homepage = "https://github.com/massimilianoviola/hilbertmap"
 Issues = "https://github.com/massimilianoviola/hilbertmap/issues"
+
+[tool.ruff.lint]
+extend-select = ["I"]
