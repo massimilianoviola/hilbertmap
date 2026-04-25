@@ -4,14 +4,14 @@ Give your depth estimation a fancy new colormap! Here you'll find an implementat
 
 <table>
   <tr>
-    <td><img src="examples/data/rgb/studio.png" width="240"/></td>
-    <td><img src="examples/data/rgb/living_room.png" width="240"/></td>
-    <td><img src="examples/data/rgb/street.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/data/rgb/studio.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/data/rgb/living_room.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/data/rgb/street.png" width="240"/></td>
   </tr>
   <tr>
-    <td><img src="examples/outputs/studio_hilbertmap.png" width="240"/></td>
-    <td><img src="examples/outputs/living_room_hilbertmap.png" width="240"/></td>
-    <td><img src="examples/outputs/street_hilbertmap.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/studio_hilbertmap.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/living_room_hilbertmap.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/street_hilbertmap.png" width="240"/></td>
   </tr>
 </table>
 
@@ -59,9 +59,9 @@ plt.show()
 
 <table>
   <tr>
-    <td><img src="examples/outputs/studio_plot.png" width="240"/></td>
-    <td><img src="examples/outputs/living_room_plot.png" width="240"/></td>
-    <td><img src="examples/outputs/street_plot.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/studio_plot.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/living_room_plot.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/street_plot.png" width="240"/></td>
   </tr>
 </table>
 
@@ -75,8 +75,8 @@ The seven-edge Hamiltonian path on the RGB cube (left) carries depth values from
     <td align="center"><b>Saturation curves</b></td>
   </tr>
   <tr>
-    <td><img src="examples/cube_walk.png" alt="cube walk" height="268"/></td>
-    <td><img src="examples/curves.png" alt="saturation curves" height="268"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/cube_walk.png" alt="cube walk" height="268"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/curves.png" alt="saturation curves" height="268"/></td>
   </tr>
 </table>
 

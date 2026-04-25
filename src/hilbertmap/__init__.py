@@ -4,7 +4,7 @@ from hilbertmap.cubewalk import depth_to_rgb, rgb_to_depth
 from hilbertmap.mpl import Norm, cmap, colorbar
 from hilbertmap.transform import depth_to_normalized, normalized_to_depth
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "depth_to_rgb",
