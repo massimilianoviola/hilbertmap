@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hilbertmap"
+version = "0.1.0"
+description = "Bijective metric-depth <-> RGB colormap along a 3D Hilbert cube walk, as used in the Vision Banana paper."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "Massimiliano Viola" },
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+keywords = ["depth", "colormap", "hilbert", "computer-vision", "visualization", "vision-banana"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "numpy>=1.23",
+    "matplotlib>=3.4",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/massimilianoviola/hilbertmap"
+Issues = "https://github.com/massimilianoviola/hilbertmap/issues"
