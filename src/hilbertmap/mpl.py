@@ -1,5 +1,7 @@
 """Matplotlib integration: cmap, Normalize subclass, and a colorbar helper that paints only the data subset."""
 
+from __future__ import annotations
+
 import matplotlib.colors as mcolors
 import numpy as np
 from matplotlib.cm import ScalarMappable
