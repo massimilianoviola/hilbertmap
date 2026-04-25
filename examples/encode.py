@@ -20,11 +20,16 @@ OUT.mkdir(exist_ok=True)
 def main() -> None:
     for npy in sorted(DATA.glob("*.npy")):
         depth = np.load(npy)
-        rgb = depth_to_rgb(depth)
-        plt.imsave(OUT / f"{npy.stem}_hilbertmap.png", rgb)
-        print(
-            f"{npy.name} -> {npy.stem}_hilbertmap.png  ({depth.min():.2f}-{depth.max():.2f} m)"
-        )
+        if npy.stem != "city":
+            rgb = depth_to_rgb(depth)
+            plt.imsave(OUT / f"{npy.stem}_hilbertmap.png", rgb)
+            print(
+                f"{npy.name} -> {npy.stem}_hilbertmap.png  ({depth.min():.2f}-{depth.max():.2f} m)"
+            )
+        else:
+            rgb = depth_to_rgb(depth, lam=-4.0, c=120.0)
+            plt.imsave(OUT / "city_lam-4_c120.png", rgb)
+            print(f"{npy.name} -> city_lam-4_c120.png")
 
 
 if __name__ == "__main__":
