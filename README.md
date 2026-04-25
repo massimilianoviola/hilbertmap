@@ -1,6 +1,6 @@
 # 🎨 3D Hilbert Depth Colormap
 
-Give your depth estimation a fancy new colormap! Here you'll find an implementation of a bijective metric-depth <-> RGB mapping along a 3D Hilbert cube walk, as used in the Vision Banana 🍌 paper [[1]](#references).
+Give your depth estimation a fancy new colormap! Here you'll find an implementation of a bijective metric depth $\leftrightarrow$ RGB mapping along a 3D Hilbert cube walk, as used in the Vision Banana 🍌 paper [1].
 
 <table>
   <tr>
@@ -44,6 +44,19 @@ rgb   = depth_to_rgb(depth)           # (H, W, 3) float in [0, 1]
 back  = rgb_to_depth(rgb)             # (H, W) recovered meters
 ```
 
+Because the utility of accurate metric depth for nearby image content is generally higher than that of distant content, the default parameters $\lambda = -3$, $c = 10/3$ make the cube walk most sensitive in the first few meters and saturate beyond ~40 m. This behavior can be tuned by changing the parameters to get more meaningful color variation on deep outdoor scenes.
+
+```python
+rgb  = depth_to_rgb(depth, lam=-4.0, c=120.0)  # tuned for long-range outdoor scene
+```
+
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/data/rgb/city.png" width="240"/></td>
+    <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/city_lam-4_c120.png" width="240"/></td>
+  </tr>
+</table>
+
 ### Visualization with matplotlib
 
 ```python
@@ -80,13 +93,11 @@ The seven-edge Hamiltonian path on the RGB cube (left) carries depth values from
   </tr>
 </table>
 
-Unbounded metric depth $d \in [0, \infty)$ is squashed into $[0, 1)$ by a power transform from Barron (2025) [[2]](#references):
+Unbounded metric depth $d \in [0, \infty)$ is squashed into $[0, 1)$ by a power transform from Barron (2025) [2], with $\lambda < -1$:
 
 $$f(d, \lambda, c) = 1 - \left(1 - \frac{d}{\lambda c}\right)^{\lambda + 1}$$
 
 With defaults $\lambda = -3$, $c = 10/3$ this simplifies to $f(d) = 1 - (1 + d/10)^{-2}$, mapping $d \in [0, \infty)$ to $f \in [0, 1)$, which is then read as the fractional position along the edge walk to land on $\mathrm{RGB} \in [0, 1]^3$. The mapping is a strict bijection, so any RGB encoding can be decoded back to metric depth by projecting onto the nearest edge.
-
-Because the utility of accurate metric depth for nearby image content is generally higher than that of distant content, the default parameters $\lambda = -3$, $c = 10/3$ make the cube walk most sensitive in the first few meters and saturate beyond ~35 m. This behavior can be tuned by changing the parameters to get more meaningful color variation on deep outdoor scenes.
 
 ## 📚 References
 
