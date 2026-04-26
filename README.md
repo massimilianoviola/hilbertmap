@@ -57,6 +57,15 @@ rgb  = depth_to_rgb(depth, lam=-4.0, c=120.0)  # tuned for long-range outdoor sc
   </tr>
 </table>
 
+To swap the Barron transform (see explanation below) for a different normalization (linear, log, etc.), use the cube walk primitives directly. `hm.walk` maps a scalar in $[0, 1]$ to RGB along the cube path, and `hm.project` is its inverse:
+
+```python
+f    = np.clip((depth - vmin) / (vmax - vmin), 0.0, 1.0)  # any forward map from [0, inf) to [0, 1]
+rgb  = hm.walk(f)
+
+back = vmin + (vmax - vmin) * hm.project(rgb)             # invert to recover depth
+```
+
 ### Visualization with matplotlib
 
 ```python

@@ -9,14 +9,14 @@ from matplotlib.colorbar import Colorbar
 from matplotlib.colors import Colormap, LinearSegmentedColormap, Normalize
 from numpy.typing import NDArray
 
-from hilbertmap.cubewalk import _walk
+from hilbertmap.cubewalk import walk
 from hilbertmap.transform import depth_to_normalized, normalized_to_depth
 
 
 def cmap(n: int = 1024, name: str = "hilbertmap") -> Colormap:
     """Build a matplotlib Colormap by sampling the cube walk at n positions in [0, 1]."""
     f = np.linspace(0.0, 1.0, n)
-    rgb = _walk(f)
+    rgb = walk(f)
     return LinearSegmentedColormap.from_list(name, rgb, N=n)
 
 
