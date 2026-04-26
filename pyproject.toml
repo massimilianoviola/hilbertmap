@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hilbertmap"
-version = "0.1.2"
-description = "Bijective metric-depth <-> RGB colormap along a 3D Hilbert cube walk, as used in the Vision Banana paper."
+version = "0.1.3"
+description = "Bijective metric depth <-> RGB mapping along a 3D Hilbert cube walk, as used in the Vision Banana paper."
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
