@@ -27,7 +27,7 @@ VERTICES: NDArray[np.float64] = np.array(
 N_SEGMENTS: int = 7
 
 
-def _walk(f: NDArray[np.floating]) -> NDArray[np.floating]:
+def walk(f: NDArray[np.floating]) -> NDArray[np.floating]:
     """Sample RGB along the cube walk at scalar positions f in [0, 1]."""
     s = np.clip(f, 0.0, 1.0) * N_SEGMENTS
     # Split s=f*7 into segment index k and local position t
@@ -38,7 +38,7 @@ def _walk(f: NDArray[np.floating]) -> NDArray[np.floating]:
     return v0 + t[..., None] * (v1 - v0)
 
 
-def _project(rgb: NDArray[np.floating]) -> NDArray[np.floating]:
+def project(rgb: NDArray[np.floating]) -> NDArray[np.floating]:
     """Project RGB samples onto the cube walk and return scalar positions in [0, 1]."""
     starts = VERTICES[:-1]
     ends = VERTICES[1:]
@@ -63,7 +63,7 @@ def depth_to_rgb(
 ) -> NDArray[np.floating]:
     """Encode metric depth as an RGB image along the cube walk."""
     f = depth_to_normalized(depth, lam=lam, c=c)
-    return _walk(f)
+    return walk(f)
 
 
 def rgb_to_depth(
@@ -72,5 +72,5 @@ def rgb_to_depth(
     c: float = 10.0 / 3.0,
 ) -> NDArray[np.floating]:
     """Decode an RGB image back to metric depth by inverting the cube walk."""
-    f = _project(rgb)
+    f = project(rgb)
     return normalized_to_depth(f, lam=lam, c=c)

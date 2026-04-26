@@ -57,6 +57,15 @@ rgb  = depth_to_rgb(depth, lam=-4.0, c=120.0)  # tuned for long-range outdoor sc
   </tr>
 </table>
 
+To swap the Barron transform (see explanation below) for a different normalization (linear, log, etc.), use the cube walk primitives directly. `hm.walk` maps a scalar in $[0, 1]$ to RGB along the cube path, and `hm.project` is its inverse:
+
+```python
+f    = np.clip((depth - vmin) / (vmax - vmin), 0.0, 1.0)  # any forward map from [0, inf) to [0, 1]
+rgb  = hm.walk(f)
+
+back = vmin + (vmax - vmin) * hm.project(rgb)             # invert to recover depth
+```
+
 ### Visualization with matplotlib
 
 ```python
@@ -68,7 +77,7 @@ hm.colorbar(im, label="depth (m)")
 plt.show()
 ```
 
-`hm.Norm` applies the fixed power transform; `hm.colorbar` paints only the cmap subset the data actually covers.
+`hm.Norm` applies the fixed power transform (same depth $\to$ same color across images). With this, `hm.colorbar` spans only the cmap subset the data actually covers.
 
 <table>
   <tr>
@@ -77,6 +86,41 @@ plt.show()
     <td><img src="https://raw.githubusercontent.com/massimilianoviola/hilbertmap/main/examples/outputs/street_plot.png" width="240"/></td>
   </tr>
 </table>
+
+In addition, transform params can be tuned as in direct encoding:
+
+```python
+im = plt.imshow(depth, cmap=hm.cmap(), norm=hm.Norm(lam=-4.0, c=120.0))  # global, long-range outdoor
+hm.colorbar(im, label="depth (m)")
+plt.show()
+```
+
+Note that passing `vmin` / `vmax` to `hm.Norm` does not rescale the mapping, only the displayed colorbar range:
+
+```python
+im = plt.imshow(depth, cmap=hm.cmap(), norm=hm.Norm(vmin=2.0, vmax=10.0))  # same global mapping, colorbar rescaled
+hm.colorbar(im, label="depth (m)")  # <- this now shows [2, 10]
+plt.show()
+```
+
+For per-image rescaling *without* the power transform, pair `hm.cmap()` with a standard matplotlib normalizer or simply omit it. This is the default behavior of other matplotlib colormaps.
+
+Omit the normalizer to autoscale linearly to the data's min and max:
+
+```python
+im = plt.imshow(depth, cmap=hm.cmap())  # linear, autoscaled to min/max, covering full cmap from black to white
+hm.colorbar(im, label="depth (m)")
+plt.show()
+```
+
+Or pass `vmin` and `vmax` for a fixed range:
+
+```python
+im = plt.imshow(depth, cmap=hm.cmap(), vmin=0.0, vmax=80.0)               # linear, fixed range
+# im = plt.imshow(depth, cmap=hm.cmap(), norm=plt.Normalize(0.0, 80.0))   # equivalent
+hm.colorbar(im, label="depth (m)")
+plt.show()
+```
 
 ## 🧭 How it works
 
